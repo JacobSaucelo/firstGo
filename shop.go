@@ -51,3 +51,5 @@ func createItem(n string, r byte, p byte) shopItems {
 
 	return item
 }
+
+//? shop.go - types.go

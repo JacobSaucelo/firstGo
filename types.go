@@ -6,3 +6,9 @@ type shopItems struct {
 	name   string
 	price  byte
 }
+
+type transactionType struct {
+	buyerName string
+	item      map[string]shopItems
+	total     byte
+}

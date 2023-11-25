@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"fmt"
 	"os"
+	"strconv"
 	"strings"
 )
 
@@ -23,13 +24,15 @@ func main() {
 
 func mainMenu() {
 	reader := bufio.NewReader(os.Stdin)
-	fmt.Printf("Main Menu: \n  > shop\n  > exit\n")
+	fmt.Printf("Main Menu: \n > shop\n > brightness\n > exit\n")
 	pick, _ := reader.ReadString('\n')
 
 	switch strings.TrimSpace(pick) {
 	case "shop":
-		fmt.Println("you picked shop.")
 		showStore()
+	case "brightness":
+		brightness()
+		// fmt.Println("you picked brightness.")
 	case "exit":
 		fmt.Println("you picked exit.")
 	default:
@@ -66,5 +69,27 @@ func showStore() {
 		fmt.Println("terminal: That is not a valid input...")
 		showStore()
 	}
+}
+
+func brightness() {
+	reader := bufio.NewReader(os.Stdin)
+
+	fmt.Println("Set brightness to 1.0-10.0")
+	value, err := reader.ReadString('\n')
+
+	if err != nil {
+		fmt.Println("terminal: Invalid input.")
+		brightness()
+	}
+
+	bValue := strings.TrimSpace(value)
+	parsedValue, err := strconv.ParseFloat(bValue, 64)
+
+	if parsedValue > 10 {
+		fmt.Println("terminal: Invalid input. up to 1.0-10.0 values only")
+		brightness()
+	}
+
+	fmt.Println("Brightness is set to", parsedValue)
 
 }
